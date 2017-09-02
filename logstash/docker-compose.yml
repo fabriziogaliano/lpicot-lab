@@ -27,7 +27,7 @@ services:
       container_name: logstash
 
       volumes:
-      #    - "./logstash/log:/var/log"
+         - "./logstash/log:/var/log"
          - "./logstash/conf/custom.conf:/usr/share/logstash/config/custom.conf"
          - "./logstash/conf/logstash.yaml:/usr/share/logstash/config/logstash.yaml"
 
@@ -65,8 +65,8 @@ services:
 
       container_name: kibana
 
-      # volumes:
-      #    - "./kibana/conf/kibana.yml:/usr/share/kibana/config/kibana.yml"
+      volumes:
+         - "./kibana/conf/kibana.yml:/usr/share/kibana/config/kibana.yml"
 
       environment:
          SERVER_NAME: lpicot.lab.local
