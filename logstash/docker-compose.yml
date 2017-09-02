@@ -47,16 +47,17 @@ services:
       #    - "./elasticsearch/data:/usr/share/elasticsearch/data"
 
       environment:
-         - cluster.name=lpicot-cluster
-         - bootstrap.memory_lock=true
-         - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+         - 'cluster.name=lpicot-cluster'
+         - 'bootstrap.memory_lock=true'
+         - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+         - 'xpack.security.enabled=false'
 
       networks:
          - lpicot
 
       ports:
          - "9200:9200"
-
+         - "9300:9300"
    kibana:
       image: docker.elastic.co/kibana/kibana:5.5.2
 
