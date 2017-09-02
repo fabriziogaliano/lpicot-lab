@@ -22,6 +22,9 @@ services:
       networks:
          - lpicot
 
+      ports:
+         - "514:514/udp"
+
    logstash:
       image: docker.elastic.co/logstash/logstash:5.5.2
 
@@ -38,6 +41,10 @@ services:
 
       networks:
          - lpicot
+
+      ports:
+         - "5000:5000"
+         - "5514:5514/udp"
 
    elasticsearch:
       image: docker.elastic.co/elasticsearch/elasticsearch:5.5.2
@@ -58,6 +65,9 @@ services:
 
       networks:
          - lpicot
+
+      ports:
+         - "9200:9200"
 
    kibana:
       image: docker.elastic.co/kibana/kibana:5.5.2
