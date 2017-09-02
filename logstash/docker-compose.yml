@@ -28,7 +28,7 @@ services:
 
       volumes:
          - "./logstash/log:/var/log"
-         - "./logstash/conf/logstash.conf:/usr/share/logstash/pipeline/logstash.conf"
+         - "./logstash/pipeline:/usr/share/logstash/pipeline"
          - "./logstash/conf/logstash.yml:/usr/share/logstash/config/logstash.yml"
 
       networks:
