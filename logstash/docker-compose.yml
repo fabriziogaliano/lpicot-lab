@@ -65,8 +65,8 @@ services:
 
       container_name: kibana
 
-      volumes:
-         - "./kibana/conf/kibana.yml:/usr/share/kibana/config/kibana.yml"
+      # volumes:
+      #    - "./kibana/conf/kibana.yml:/usr/share/kibana/config/kibana.yml"
 
       environment:
          SERVER_NAME: lpicot.lab.local
