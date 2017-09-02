@@ -87,4 +87,4 @@ services:
           driver: syslog
           options:
             tag: lpicot/logstash-nginx
-            syslog-address: "udp://syslog:514"
+            syslog-address: "udp://10.2.1.21:514"
