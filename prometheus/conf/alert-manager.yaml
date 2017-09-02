@@ -1,0 +1,27 @@
+global:
+  smtp_smarthost: 'mailhost.com:25'
+  smtp_from: 'lozio@mosaicoon.com'
+  smtp_require_tls: false
+
+route:
+  receiver: mail
+  routes:
+  - match:
+      severity: critical
+    continue: true
+    receiver: mail
+  - match:
+      severity: critical
+    receiver: slack
+
+receivers:
+- name: mails
+  email_configs:
+    - to: 'barba@mosaicoon.com'
+
+- name: slack
+  slack_configs:
+    - send_resolved: true
+      username: 'AlertManager'
+      channel: '#alert'
+      api_url: 'your api key url'

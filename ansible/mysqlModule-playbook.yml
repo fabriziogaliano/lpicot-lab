@@ -1,0 +1,25 @@
+---
+
+- name: Create a DB for later usage
+  hosts: all
+  become: true
+  become_user: root
+  gather_facts: true
+  tasks:
+    - name: Install PIP
+      apt: name=python-pip state=present
+
+    - name: Libmysqlclient Dev
+      apt: name=libmysqlclient-dev state=present
+
+    - name: Install Python MysqlDB Module
+      pip: name=MySQL-python
+
+    - name: Create a custom DB on MySQL
+      mysql_db: db=customeone state=present
+
+    - name: Create a custom User on MySQL
+      mysql_user: user=customeone password=Password. priv=customeone.*:ALL state=present
+
+    - name: Make an operation on the DB
+      command: mysql -ucustomeone -pPassword. -e 'CREATE TABLE reg (name varchar(30), email varchar(30));' customeone

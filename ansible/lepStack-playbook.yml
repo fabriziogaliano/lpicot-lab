@@ -1,0 +1,25 @@
+---
+
+- name: install LEP Stack
+  hosts: webservers
+  become: true
+  become_user: root
+  gather_facts: true
+  tasks:
+    - name: install nginx
+      apt: name=nginx update_cache=yes state=latest
+
+    - name: install mysql
+      apt: name=mysql-server update_cache=yes state=latest
+
+    - name: install myql client
+      apt: name=mysql-client update_cache=yes state=latest
+
+    - name: install php fpm
+      apt: name=php7.0-fpm update_cache=yes state=latest
+
+    - name: systemd enable nginx
+      systemd: name=nginx enabled=yes state=started
+
+    - name: systemd enable mysql
+      systemd: name=mysql enabled=yes state=started

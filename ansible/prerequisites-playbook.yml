@@ -1,0 +1,45 @@
+---
+
+- name: install Prerequisites on all nodes
+  hosts: all
+  become: true
+  become_user: root
+  gather_facts: true
+  tasks:
+
+### ADD Service User ###
+
+    - name: ADD ansible user and manager user
+      user:
+        name: "{{ item.name }}"
+        state: present
+        groups: "{{ item.groups }}"
+      with_items:
+        - { name: 'ansible', groups: 'sudo'}
+        - { name: 'customuser', groups: 'root'}
+
+### GIT ###
+
+    - name: install git
+      apt: name=git update_cache=yes state=latest
+
+### Python pkgs ###
+
+    - name: install python
+      apt: name=python update_cache=yes state=latest
+
+    - name: install python-apt
+      apt: name=python-apt update_cache=yes state=latest
+    
+    - name: install python-pycurl
+      apt: name=python-pycurl update_cache=yes state=latest
+
+### HTOP ###
+
+    - name: install htop
+      apt: name=htop update_cache=yes state=latest
+
+### CURL ###
+
+    - name: install curl
+      apt: name=curl update_cache=yes state=latest

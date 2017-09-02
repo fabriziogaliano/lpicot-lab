@@ -1,0 +1,13 @@
+---
+
+- name: Copy Files into a SRV
+  hosts: all
+  become: yes
+  become_user: root
+  gather_facts: true
+  tasks:
+    - name: Copy some file into a SRV
+      copy: src=/home/ubuntu/someFile.txt dest=/root/someFile.txt
+    
+    - name: Create Folder
+      file: state=directory recurse=yes path=/etc/ansible/facts.d

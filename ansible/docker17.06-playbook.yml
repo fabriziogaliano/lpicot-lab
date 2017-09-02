@@ -1,0 +1,55 @@
+---
+
+- name: install Docker and Docker-Compose
+  hosts: all
+  become: true
+  become_user: root
+  gather_facts: true
+  tasks:
+    - name: remove previous docker version
+      apt: name=docker update_cache=yes state=absent
+    
+    - name: remove previous docker-engine version
+      apt: name=docker-engine update_cache=yes state=absent
+
+    - name: remove previous docker.io version
+      apt: name=docker.io update_cache=yes state=absent
+
+    - name: install apt transport ca-cert software-properties and curl
+      apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      with_items:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+
+    - name: Download Docker repository key (docker 17.06 CE)
+      apt_key: url=https://download.docker.com/linux/ubuntu/gpg state=present validate_certs=no
+
+    - name: Add Docker repository
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+        state: present
+        update_cache: yes
+
+    - name: Install docker 17.06 CE
+      apt: name=docker-ce=17.06.0~ce-0~ubuntu update_cache=yes
+
+    - name: Install Docker Compose
+      get_url: 
+        url: https://github.com/docker/compose/releases/download/1.14.0/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: 750
+
+    - name: Enable Docker service
+      systemd: name=docker enabled=yes state=started
+      notify:
+        - restart docker
+
+  handlers:
+    - name: restarting docker
+      systemd: name=docker state=restarted
+      listen: "restart docker"

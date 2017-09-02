@@ -1,0 +1,9 @@
+---
+- name: Conditional
+  hosts: all
+  become: true
+  become_user: root
+  gather_facts: true
+  tasks:
+    - shell: echo "only on Ubuntu Xenial (16.04), derivatives, and later"
+      when: ansible_os_family == "Debian" and ansible_lsb.major_release|int >= 16

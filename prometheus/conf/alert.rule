@@ -1,0 +1,12 @@
+ALERT   serviceDownAlert
+    IF absent(((time() - container_last_seen{name="<service_name>"}) < 5 ))
+    FOR 5s
+    LABELS {
+        severity = "critical",
+        service = "backend"
+    }
+    ANNOTATIONS {
+        SUMMARY = "Container instance Down!",
+        DESCRIPTION = "Container instance is down for more than 15s"
+
+    }
