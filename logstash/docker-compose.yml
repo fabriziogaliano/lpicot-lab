@@ -18,8 +18,8 @@ services:
       networks:
          - lpicot
 
-      ports:
-         - "514:514/udp"
+      # ports:
+      #    - "514:514/udp"
 
    logstash:
       image: docker.elastic.co/logstash/logstash:5.5.2
@@ -28,15 +28,15 @@ services:
 
       volumes:
          - "./logstash/log:/var/log"
-         - "./logstash/conf/custom.conf:/usr/share/logstash/config/custom.conf"
-         - "./logstash/conf/logstash.yaml:/usr/share/logstash/config/logstash.yaml"
+         - "./logstash/conf/logstash.conf:/usr/share/logstash/pipeline/logstash.conf"
+         - "./logstash/conf/logstash.yml:/usr/share/logstash/config/logstash.yml"
 
       networks:
          - lpicot
 
       ports:
          - "5000:5000"
-      #    - "514:514/udp"
+         - "514:514/udp"
 
    elasticsearch:
       image: docker.elastic.co/elasticsearch/elasticsearch:5.4.0
