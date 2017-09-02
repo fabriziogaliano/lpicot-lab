@@ -15,10 +15,6 @@ services:
          - "./syslog/conf.d/:/etc/rsyslog.d"
          - "./syslog/log:/var/log"
 
-      dns:
-         - 8.8.8.8
-         - 8.8.4.4
-
       networks:
          - lpicot
 
@@ -34,10 +30,6 @@ services:
          - "./logstash/log:/var/log"
          - "./logstash/conf/custom.conf:/usr/share/logstash/config/custom.conf"
          - "./logstash/conf/logstash.yaml:/usr/share/logstash/config/logstash.yaml"
-
-      dns:
-         - 8.8.8.8
-         - 8.8.4.4
 
       networks:
          - lpicot
@@ -59,10 +51,6 @@ services:
          - bootstrap.memory_lock=true
          - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
 
-      dns:
-         - 8.8.8.8
-         - 8.8.4.4
-
       networks:
          - lpicot
 
@@ -78,10 +66,6 @@ services:
          SERVER_NAME: lpicot.lab.local
          ELASTICSEARCH_URL: http://elasticsearch
 
-      dns:
-        - 8.8.8.8
-        - 8.8.4.4
-
       networks:
          - lpicot
 
@@ -92,10 +76,6 @@ services:
       image: nginx:1.13.3-alpine
 
       container_name: nginx
-
-      dns:
-         - 8.8.8.8
-         - 8.8.4.4
 
       networks:
          - lpicot
