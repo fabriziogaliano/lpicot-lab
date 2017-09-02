@@ -43,8 +43,8 @@ services:
 
       container_name: elasticsearch
 
-      # volumes:
-      #    - "./elasticsearch/data:/usr/share/elasticsearch/data"
+      volumes:
+         - "./elasticsearch/data:/usr/share/elasticsearch/data"
 
       environment:
          - 'transport.host=127.0.0.1'
