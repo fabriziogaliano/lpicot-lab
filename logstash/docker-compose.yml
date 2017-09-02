@@ -4,6 +4,8 @@ services:
    syslog:
       image: fabriziogaliano/docker-rsyslog:v8.18.0
 
+      container_name: syslog
+
       volumes: 
          - "./syslog/conf/rsyslog.conf:/etc/rsyslog.conf"
          - "./syslog/conf.d/:/etc/rsyslog.d"
@@ -41,8 +43,8 @@ services:
 
       environment:
          - cluster.name=lpicot-cluster
-         - bootstrap.memory_lock=true
-         - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+        #  - bootstrap.memory_lock=true
+        #  - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
 
       dns:
          - 8.8.8.8
