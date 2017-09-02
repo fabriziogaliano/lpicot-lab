@@ -15,8 +15,6 @@ services:
          - 8.8.8.8
          - 8.8.4.4
 
-      network_mode: host
-
    logstash:
       image: docker.elastic.co/logstash/logstash:5.5.2
 
@@ -31,8 +29,6 @@ services:
          - 8.8.8.8
          - 8.8.4.4
 
-      network_mode: host
-
    elasticsearch:
       image: docker.elastic.co/elasticsearch/elasticsearch:5.5.2
 
@@ -43,14 +39,12 @@ services:
 
       environment:
          - cluster.name=lpicot-cluster
-        #  - bootstrap.memory_lock=true
-        #  - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+         - bootstrap.memory_lock=true
+         - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
 
       dns:
          - 8.8.8.8
          - 8.8.4.4
-
-      network_mode: host
 
    kibana:
       image: docker.elastic.co/kibana/kibana:5.5.2
@@ -59,16 +53,14 @@ services:
 
       environment:
          SERVER_NAME: lpicot.lab.local
-         ELASTICSEARCH_URL: http://localhost
+         ELASTICSEARCH_URL: http://elasticsearch
 
       dns:
         - 8.8.8.8
         - 8.8.4.4
 
-      network_mode: host
-
       ports:
-         - "80:5601"
+         - "5601:5601"
 
    nginx: 
       image: nginx:1.13.3-alpine
@@ -77,10 +69,11 @@ services:
          - 8.8.8.8
          - 8.8.4.4
 
-      network_mode: host
+      ports:
+         - "8088:80"
 
       logging:
           driver: syslog
           options:
             tag: lpicot/logstash-nginx
-            syslog-address: "udp://localhost:514"
+            syslog-address: "udp://syslog:514"
