@@ -27,7 +27,7 @@ services:
       container_name: logstash
 
       volumes:
-         - "./logstash/log:/var/log"
+      #    - "./logstash/log:/var/log"
          - "./logstash/conf/custom.conf:/usr/share/logstash/config/custom.conf"
          - "./logstash/conf/logstash.yaml:/usr/share/logstash/config/logstash.yaml"
 
@@ -39,7 +39,7 @@ services:
          - "5514:5514/udp"
 
    elasticsearch:
-      image: docker.elastic.co/elasticsearch/elasticsearch:5.5.2
+      image: docker.elastic.co/elasticsearch/elasticsearch:5.4.0
 
       container_name: elasticsearch
 
@@ -47,9 +47,11 @@ services:
       #    - "./elasticsearch/data:/usr/share/elasticsearch/data"
 
       environment:
-         - 'cluster.name=lpicot-cluster'
-         - 'bootstrap.memory_lock=true'
-         - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+         - 'transport.host=127.0.0.1'
+         - 'http.host=0.0.0.0'
+      #    - 'cluster.name=lpicot-cluster'
+      #    - 'bootstrap.memory_lock=true'
+      #    - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
          - 'xpack.security.enabled=false'
 
       networks:
@@ -59,16 +61,17 @@ services:
          - "9200:9200"
          - "9300:9300"
    kibana:
-      image: docker.elastic.co/kibana/kibana:5.5.2
+      image: docker.elastic.co/kibana/kibana:5.4.0
 
       container_name: kibana
 
-      volumes:
-         - "./kibana/conf/kibana.yml:/usr/share/kibana/config/kibana.yml"
+      # volumes:
+      #    - "./kibana/conf/kibana.yml:/usr/share/kibana/config/kibana.yml"
 
       environment:
          SERVER_NAME: lpicot.lab.local
          ELASTICSEARCH_URL: http://elasticsearch:9200
+      #    XPACK_MONITORING_ENABLED: false
 
       networks:
          - lpicot
