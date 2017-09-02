@@ -29,7 +29,7 @@ services:
       volumes:
          - "./logstash/log:/var/log"
          - "./logstash/pipeline:/usr/share/logstash/pipeline"
-         - "./logstash/conf/logstash.yml:/usr/share/logstash/config/logstash.yml"
+      #    - "./logstash/conf/logstash.yml:/usr/share/logstash/config/logstash.yml"
 
       networks:
          - lpicot
