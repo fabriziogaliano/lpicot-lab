@@ -23,6 +23,7 @@ services:
       volumes:
          - "./logstash/log:/var/log"
          - "./logstash/conf/custom.conf:/usr/share/logstash/config/custom.conf"
+         - "./logstash/conf/logstash.yaml:/usr/share/logstash/config/logstash.yaml"
 
       dns:
          - 8.8.8.8
@@ -49,20 +50,23 @@ services:
 
       network_mode: host
 
-  kibana:
-    image: docker.elastic.co/kibana/kibana:5.5.2
+   kibana:
+      image: docker.elastic.co/kibana/kibana:5.5.2
 
-    container_name: kibana
+      container_name: kibana
 
-    environment:
-      SERVER_NAME: lpicot.lab.local
-      ELASTICSEARCH_URL: http://localhost
+      environment:
+         SERVER_NAME: lpicot.lab.local
+         ELASTICSEARCH_URL: http://localhost
 
-    dns:
+      dns:
         - 8.8.8.8
         - 8.8.4.4
 
-    network_mode: host
+      network_mode: host
+
+      ports:
+         - "80:5601"
 
    nginx: 
       image: nginx:1.13.3-alpine
