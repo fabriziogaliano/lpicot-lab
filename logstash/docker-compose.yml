@@ -35,8 +35,8 @@ services:
          - lpicot
 
       ports:
-         - "5000:5000"
-         - "5000:5000/udp"
+      #    - "5000:5000"
+      #    - "5000:5000/udp"
       #    - "514:514/udp"
 
    elasticsearch:
@@ -58,9 +58,9 @@ services:
       networks:
          - lpicot
 
-      ports:
-         - "9200:9200"
-         - "9300:9300"
+      # ports:
+      #    - "9200:9200"
+      #    - "9300:9300"
    kibana:
       image: docker.elastic.co/kibana/kibana:5.4.0
 
@@ -95,4 +95,4 @@ services:
           driver: syslog
           options:
             tag: lpicot/logstash-nginx
-            syslog-address: "udp://10.2.1.21:514"
+            syslog-address: "udp://localhost:514"
