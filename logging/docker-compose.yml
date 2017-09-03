@@ -7,12 +7,15 @@ networks:
 services:
 
    filebeat:
-      image: docker.elastic.co/beats/filebeat:5.5.2
+      # image: docker.elastic.co/beats/filebeat:5.5.2
+      build:
+         context: ./filebeat/build
+         dockerfile: Dockerfile
 
       container_name: filebeat
 
       volumes:
-         - "/var/lib/docker/containers:/mnt/hostLog:Z"
+         - "/var/lib/docker/containers:/mnt/hostLog:ro"
          - "./filebeat/conf:/usr/share/filebeat/conf"
 
       networks:
