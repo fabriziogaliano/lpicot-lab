@@ -5,5 +5,3 @@ USER root
 RUN mkdir -p /mnt/hostLog \
     && chown filebeat.filebeat /mnt/hostLog \
     && chmod 740 /mnt/hostLog
-
-USER filebeat
