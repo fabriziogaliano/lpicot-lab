@@ -11,8 +11,9 @@ services:
 
       container_name: filebeat
 
-      # volumes:
-      #    - "./filebeat/conf/filebeat.yml:/usr/share/filebeat/filebeat.yml"
+      volumes:
+         - "/var/lib/docker/containers:/mnt/log:ro"
+         - "./filebeat/conf/filebeat.yml:/usr/share/filebeat/filebeat.yml"
 
       networks:
          - lpicot

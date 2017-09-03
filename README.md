@@ -9,3 +9,4 @@
 * Packer
 * Ansible
 * Prometheus
+* Filebeat
