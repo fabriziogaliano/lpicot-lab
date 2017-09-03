@@ -13,13 +13,15 @@ services:
 
       volumes:
          - "/var/lib/docker/containers:/mnt/log:ro"
-         - "./filebeat/conf/filebeat.yml:/usr/share/filebeat/filebeat.yml"
+         - "./filebeat/conf/filebeat.yml:/usr/share/filebeat/conf"
 
       networks:
          - lpicot
       
       # ports:
       #    - ""
+
+      command: ["filebeat", "-e", "-c", "/usr/share/filebeat/conf/filebeat.yml"]
 
    syslog:
       image: fabriziogaliano/docker-rsyslog:v8.18.0
