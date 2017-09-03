@@ -1,0 +1,14 @@
+filebeat.prospectors:
+- input_type: log
+  paths:
+    - /mn/log/*/*.log
+  document_type: docker
+  json.message_key: log
+
+processors:
+- add_cloud_metadata:
+
+output.elasticsearch:
+  hosts: ['elasticsearch:9200']
+  username: elastic
+  password: changeme
