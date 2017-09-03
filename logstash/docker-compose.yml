@@ -34,7 +34,7 @@ services:
       networks:
          - lpicot
 
-      ports:
+      # ports:
       #    - "5000:5000"
       #    - "5000:5000/udp"
       #    - "514:514/udp"
