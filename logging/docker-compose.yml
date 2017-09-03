@@ -111,7 +111,7 @@ services:
       container_name: nginx-syslog
 
       volumes:
-         - "./nginx-syslog/html:/var/www/html"
+         - "./nginx-syslog/html:/usr/share/nginx/html"
 
       networks:
          - lpicot
@@ -131,7 +131,7 @@ services:
       container_name: nginx-filebeat
 
       volumes:
-         - "./nginx-filebeat/html:/var/www/html"
+         - "./nginx-filebeat/html:/usr/share/nginx/html"
 
       networks:
          - lpicot
