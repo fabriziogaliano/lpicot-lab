@@ -102,10 +102,13 @@ services:
       ports:
          - "5601:5601"
 
-   nginx:   
+   nginx-syslog:   
       image: nginx:1.13.3-alpine
 
-      container_name: nginx
+      container_name: nginx-syslog
+
+      volumes:
+         - "./nginx-syslog/html:/var/www/html"
 
       networks:
          - lpicot
@@ -118,3 +121,17 @@ services:
           options:
             tag: lpicot/logstash-nginx
             syslog-address: "udp://localhost:514"
+
+   nginx-filebeat:   
+      image: nginx:1.13.3-alpine
+
+      container_name: nginx-filebeat
+
+      volumes:
+         - "./nginx-filebeat/html:/var/www/html"
+
+      networks:
+         - lpicot
+
+      ports:
+         - "8880:80"
