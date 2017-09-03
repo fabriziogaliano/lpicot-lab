@@ -1,7 +1,7 @@
 filebeat.prospectors:
 - input_type: log
   paths:
-    - /mn/log/*/*.log
+    - /mn/hostLog/*/*.log
   document_type: docker
   json.message_key: log
 
